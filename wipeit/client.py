@@ -2,6 +2,7 @@ import os
 import secrets
 import socket
 import webbrowser
+from pathlib import Path
 from typing import List
 
 import praw
@@ -15,7 +16,13 @@ class AuthorizedClient(praw.Reddit):
     client_id = "9thvo8KiLG6Xlw"
     redirect_uri = "http://localhost:8080"
     user_agent = f"wipeit:9thvo8KiLG6Xlw:{VERSION} (by /u/iPodAddict181)"
-    refresh_token_filename = "refresh_token.txt"
+
+    @property
+    def refresh_token_filename(self) -> str:
+        base_path = os.path.join(Path.home(), ".wipeit")
+        if not os.path.isdir(base_path):
+            os.makedirs(base_path)
+        return os.path.join(base_path, "refresh_token.txt")
 
     def __init__(self, scopes: List[str], duration: str = "permanent"):
         token_manager = self.get_token_manager()
@@ -62,7 +69,6 @@ class AuthorizedClient(praw.Reddit):
         self,
         scopes: List[str] = None,
         duration: str = "permanent",
-        persist: bool = True,
     ) -> (str, None):
         # Set default scope, add identity if not provided
         if not scopes:

@@ -1,6 +1,10 @@
+import datetime as dt
+
 from wipeit.client import AuthorizedClient
 
 
 reddit = AuthorizedClient(["identity", "edit", "history"])
-for item in reddit.user.me().comments.new():
-    print(item.body)
+user = reddit.user.me()
+comments = user.comments.new()
+for comment in comments:
+    print(dt.datetime.fromtimestamp(comment.created))
