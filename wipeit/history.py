@@ -1,12 +1,14 @@
 from abc import ABC, abstractmethod
 import datetime as dt
 from typing import Iterable, TypeVar, Generic
+import uuid
 
 from praw.models import Comment, Submission, ListingGenerator
+from praw.models.reddit.mixins import UserContentMixin
 
 from wipeit.client import AuthorizedClient
 
-T = TypeVar("T")
+T = TypeVar("T", bound=UserContentMixin)
 
 
 class BaseHistory(ABC, Generic[T]):
@@ -20,12 +22,37 @@ class BaseHistory(ABC, Generic[T]):
         raise NotImplementedError("Property 'history' must be defined.")
 
     def filter_by_date(
-        self, start_dt: dt.datetime, end_dt: dt.datetime = None
+        self, start_dt: dt.datetime = None, end_dt: dt.datetime = None
     ) -> Iterable[T]:
-        if not end_dt:
-            end_dt = dt.datetime.now()
-        start_ts, end_ts = [start_dt.timestamp(), end_dt.timestamp()]
-        return [item for item in self.history if start_ts <= item.created <= end_ts]
+        # Parse start timestamp, default to 0
+        if start_dt:
+            start_ts = start_dt.timestamp()
+        else:
+            start_ts = 0
+
+        # Parse end timestamp, default to now
+        if end_dt:
+            end_ts = end_dt.timestamp()
+        else:
+            end_ts = dt.datetime.now().timestamp()
+
+        # Iterate
+        for item in self.history:
+            if start_ts <= item.created <= end_ts:
+                yield item
+
+    def wipe(
+        self,
+        start_dt: dt.datetime = None,
+        end_dt: dt.datetime = None,
+        overwrite: bool = False,
+    ) -> Iterable[str]:
+        items = self.filter_by_date(start_dt, end_dt)
+        for item in items:
+            if overwrite:
+                item.edit(uuid.uuid4().hex)
+            item.delete()
+            yield str(item)
 
 
 class CommentHistory(BaseHistory[Comment]):
