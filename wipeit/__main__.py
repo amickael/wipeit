@@ -61,8 +61,8 @@ def validate_date(ctx, param, value: str) -> dt.datetime:
     "--days",
     "-d",
     help="Number of days worth of content to purge.",
-    prompt=True,
-    type=click.IntRange(1, 500, clamp=True),
+    default=365,
+    type=click.IntRange(1, 365 * 5, clamp=True),
 )
 @click.option(
     "--from-date",
