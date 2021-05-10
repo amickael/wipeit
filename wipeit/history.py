@@ -46,13 +46,13 @@ class BaseHistory(ABC, Generic[T]):
         start_dt: dt.datetime = None,
         end_dt: dt.datetime = None,
         overwrite: bool = False,
-    ) -> Iterable[str]:
+    ) -> Iterable[T]:
         items = self.filter_by_date(start_dt, end_dt)
         for item in items:
             if overwrite:
                 item.edit(uuid.uuid4().hex)
             item.delete()
-            yield str(item)
+            yield item
 
 
 class CommentHistory(BaseHistory[Comment]):

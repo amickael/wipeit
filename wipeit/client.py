@@ -8,8 +8,7 @@ from typing import List
 import praw
 from praw.util.token_manager import FileTokenManager, BaseTokenManager
 
-with open("VERSION", "r") as infile:
-    VERSION = infile.read().strip()
+from wipeit import VERSION
 
 
 class AuthorizedClient(praw.Reddit):

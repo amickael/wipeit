@@ -12,6 +12,6 @@ setup(
     packages=find_packages(),
     install_requires=requirements,
     entry_points={
-        "console_scripts": ["wipeit=wipeit.main:main"],
+        "console_scripts": ["wipeit=wipeit.__main__:cli"],
     },
 )
