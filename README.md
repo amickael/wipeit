@@ -14,4 +14,4 @@ pip install wipeit
 
 ## ⚙️ Command Line Arguments
 
-⚖️ License
+## ⚖️ License
