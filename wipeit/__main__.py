@@ -60,30 +60,37 @@ def validate_date(ctx, param, value: str) -> dt.datetime:
 @click.option(
     "--days",
     "-d",
-    help="Number of days worth of content to purge.",
+    help="Number of days worth of content to delete.",
     default=365,
     type=click.IntRange(1, 365 * 5, clamp=True),
 )
 @click.option(
     "--from-date",
-    help="Date to start purge, in ISO format (YYYY-MM-DD). Defaults to today.",
+    "-f",
+    help="Date relative to --days, in ISO format (YYYY-MM-DD). Defaults to today.",
     type=str,
     callback=validate_date,
 )
 @click.option(
-    "--comments/--no-comments",
+    "--comments",
+    "-c",
+    is_flag=True,
     default=False,
-    help="Delete/don't delete comments.",
+    help="Delete comments.",
 )
 @click.option(
-    "--submissions/--no-submissions",
+    "--submissions",
+    "-s",
+    is_flag=True,
     default=False,
-    help="Delete/don't delete submissions.",
+    help="Delete submissions.",
 )
 @click.option(
-    "--overwrite/--no-overwrite",
+    "--overwrite",
+    "-o",
+    is_flag=True,
     default=False,
-    help="Overwrite content with random text, this will scramble deleted content in the Pushshift API.",
+    help="Overwrite content with random text before deletion.",
 )
 def cli(
     days: int,
