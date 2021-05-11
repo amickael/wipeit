@@ -23,6 +23,8 @@ wipeit -d 30 -sco
 ```
 --version                 Show the version and exit.
 -d, --days INTEGER RANGE  Number of days worth of content to delete.
+                          Defaults to 365.
+
 -f, --from TEXT           Date relative to --days, in ISO format (YYYY-MM-
                           DD). Defaults to today.
 
