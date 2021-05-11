@@ -101,7 +101,7 @@ def cli(
     *args,
     **kwargs,
 ):
-    # Initialize client and parse arguments
+    # Initialize client
     scopes = ["identity", "edit", "history"]
     try:
         client = AuthorizedClient(scopes)
@@ -118,10 +118,12 @@ def cli(
                 raise click.Abort
         else:
             raise click.Abort
-    end_dt = from_date
-    start_dt = end_dt - dt.timedelta(days=days)
+    click.echo(f"Successfully authenticated as /u/{client.user.me().name}")
+    click.echo("")
 
     # Handle
+    end_dt = from_date
+    start_dt = end_dt - dt.timedelta(days=days)
     handler = CLIHandler(client, start_dt, end_dt, overwrite)
     if comments:
         handler.delete_content(CommentHistory, "comment")
