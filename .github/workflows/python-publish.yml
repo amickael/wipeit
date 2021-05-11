@@ -3,9 +3,7 @@
 
 name: Upload Python Package
 
-on:
-  release:
-    types: [released]
+on: [release, workflow_dispatch]
 
 jobs:
   deploy:
