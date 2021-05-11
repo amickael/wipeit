@@ -6,8 +6,7 @@ name: Release
 on:
   workflow_dispatch:
   release:
-    types:
-      - release
+    types: [published]
 
 jobs:
   deploy:
