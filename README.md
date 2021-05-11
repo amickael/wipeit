@@ -25,6 +25,8 @@ The following command will purge the last 30 days of comment and submission hist
 wipeit -d 30 -sco
 ```
 
+> Note: A browser window will open to request access to your account if you have not previously authenticated.
+
 
 ## ⚙️ Options
 ```
