@@ -102,7 +102,22 @@ def cli(
     **kwargs,
 ):
     # Initialize client and parse arguments
-    client = AuthorizedClient(["identity", "edit", "history"])
+    scopes = ["identity", "edit", "history"]
+    try:
+        client = AuthorizedClient(scopes)
+    except ValueError:
+        click.echo(
+            "Authorization failed. You must allow Reddit permissions for wipeit to function."
+        )
+        confirm = click.confirm("Retry?", default=True)
+        if confirm:
+            try:
+                client = AuthorizedClient(scopes)
+            except ValueError:
+                click.echo("Authorization failed, aborting.")
+                raise click.Abort
+        else:
+            raise click.Abort
     end_dt = from_date
     start_dt = end_dt - dt.timedelta(days=days)
 

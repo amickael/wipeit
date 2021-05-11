@@ -35,6 +35,8 @@ class AuthorizedClient(praw.Reddit):
         super().__init__(**init_args)
         if not token_manager:
             refresh_token = self.obtain_token(scopes, duration)
+            if not refresh_token:
+                raise ValueError("Authorization failed")
             self.__initialize_refresh_token_file(refresh_token)
             init_args["token_manager"] = self.get_token_manager()
             super().__init__(**init_args)
