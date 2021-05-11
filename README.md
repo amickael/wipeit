@@ -15,3 +15,4 @@ pip install wipeit
 ## ⚙️ Command Line Arguments
 
 ## ⚖️ License
+[MIT © 2021 Andrew Mickael](https://github.com/amickael/wipeit/blob/master/LICENSE)
