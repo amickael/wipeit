@@ -14,7 +14,7 @@ from wipeit import VERSION
 class AuthorizedClient(praw.Reddit):
     client_id = "9thvo8KiLG6Xlw"
     redirect_uri = "http://localhost:8080"
-    user_agent = f"wipeit:9thvo8KiLG6Xlw:{VERSION} (by /u/iPodAddict181)"
+    user_agent = f"wipeit:{client_id}:{VERSION} (by /u/iPodAddict181)"
 
     @property
     def refresh_token_filename(self) -> str:
