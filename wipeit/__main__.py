@@ -60,7 +60,7 @@ def validate_date(ctx, param, value: str) -> dt.datetime:
 @click.option(
     "--days",
     "-d",
-    help="Number of days worth of content to delete.",
+    help="Number of days worth of content to delete. Defaults to 365.",
     default=365,
     type=click.IntRange(1, 365 * 5, clamp=True),
 )
