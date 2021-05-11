@@ -1,6 +1,7 @@
 # Wipeit!
 A small CLI to purge your Reddit history.
 
+[![Release](https://github.com/amickael/wipeit/actions/workflows/python-publish.yml/badge.svg)](https://github.com/amickael/wipeit/actions/workflows/python-publish.yml)
 ![PyPI](https://img.shields.io/pypi/v/wipeit?color=blue)
 [![Code style](https://img.shields.io/badge/code%20style-black-black)](https://github.com/psf/black)
 
