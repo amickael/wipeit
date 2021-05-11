@@ -3,7 +3,11 @@
 
 name: Release
 
-on: [release, workflow_dispatch]
+on:
+  workflow_dispatch:
+  release:
+    types:
+      - release
 
 jobs:
   deploy:
