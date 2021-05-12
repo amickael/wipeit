@@ -1,0 +1,5 @@
+SCOPES = [
+    "identity",
+    "edit",
+    "history",
+]

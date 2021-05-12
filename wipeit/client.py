@@ -23,7 +23,9 @@ class AuthorizedClient(praw.Reddit):
             os.makedirs(base_path)
         return os.path.join(base_path, "refresh_token.txt")
 
-    def __init__(self, scopes: List[str], duration: str = "permanent"):
+    def __init__(
+        self, scopes: List[str], duration: str = "permanent", skip_login: bool = False
+    ):
         token_manager = self.get_token_manager()
         init_args = {
             "client_id": self.client_id,
@@ -33,7 +35,7 @@ class AuthorizedClient(praw.Reddit):
             "token_manager": token_manager,
         }
         super().__init__(**init_args)
-        if not token_manager:
+        if not token_manager and not skip_login:
             refresh_token = self.obtain_token(scopes, duration)
             if not refresh_token:
                 raise ValueError("Authorization failed")
