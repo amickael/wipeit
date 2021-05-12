@@ -1,12 +1,15 @@
+from __future__ import annotations
+
 from abc import ABC, abstractmethod
 import datetime as dt
-from typing import Iterable, TypeVar, Generic
+from typing import Iterable, TypeVar, Generic, TYPE_CHECKING
 import uuid
 
 from praw.models import Comment, Submission, ListingGenerator
 from praw.models.reddit.mixins import UserContentMixin
 
-from wipeit.client import AuthorizedClient
+if TYPE_CHECKING:
+    from .client import AuthorizedClient
 
 T = TypeVar("T", bound=UserContentMixin)
 

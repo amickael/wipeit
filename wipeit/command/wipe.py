@@ -3,9 +3,13 @@ from typing import Type
 
 import click
 
-from wipeit.client import AuthorizedClient
-from wipeit.history import BaseHistory, SubmissionHistory, CommentHistory
-from .const import SCOPES
+from wipeit.models import (
+    AuthorizedClient,
+    BaseHistory,
+    SubmissionHistory,
+    CommentHistory,
+)
+from wipeit.utils import const
 
 
 class CLIHandler:
@@ -100,7 +104,7 @@ def wipe(
     *args,
     **kwargs,
 ):
-    client = AuthorizedClient(SCOPES)
+    client = AuthorizedClient(const.SCOPES)
     end_dt = from_date
     start_dt = end_dt - dt.timedelta(days=days)
     handler = CLIHandler(client, start_dt, end_dt, overwrite)
