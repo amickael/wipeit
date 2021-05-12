@@ -8,6 +8,22 @@ A small CLI to purge your Reddit history.
 
 ![wipeit](https://repository-images.githubusercontent.com/365859955/17783580-b1d0-11eb-9738-6d2bc92644e6)
 
+Table of Contents
+=================
+* [Wipeit!](#wipeit)
+   * [Dependencies](#-dependencies)
+   * [Installation](#️-installation)
+   * [Usage](#-usage)
+   * [Options](#️-options)
+      * [wipeit](#wipeit-1)
+      * [wipeit wipe](#wipeit-wipe)
+      * [wipeit login](#wipeit-login)
+      * [wipeit logout](#wipeit-logout)
+   * [Autocompletion](#-autocompletion)
+      * [bash](#bash)
+      * [zsh](#zsh)
+   * [License](#️-license)
+
 ## 👶 Dependencies
 * [Python 3.6 or higher](https://www.python.org/downloads/)
 
