@@ -1,14 +1,14 @@
 import click
 
-from wipeit.models import AuthorizedClient
-from wipeit.utils import const
+from wipeit import CONFIG
+from wipeit.app import AppClient
 
 
 @click.command()
 def login(*args, **kwargs):
     """Authorize wipeit with a Reddit account, will open a browser window to authenticate."""
     try:
-        client = AuthorizedClient(const.SCOPES)
+        client = AppClient(CONFIG.scopes)
     except ValueError:
         click.echo(
             "Authorization failed. You must allow Reddit permissions for wipeit to function."
@@ -16,7 +16,7 @@ def login(*args, **kwargs):
         retry = click.confirm("Retry?", default=True)
         if retry:
             try:
-                client = AuthorizedClient(const.SCOPES)
+                client = AppClient(CONFIG.scopes)
             except ValueError:
                 click.echo("Authorization failed, aborting.")
                 raise click.Abort

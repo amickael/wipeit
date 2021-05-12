@@ -25,7 +25,7 @@ Table of Contents
    * [License](#️-license)
 
 ## 👶 Dependencies
-* [Python 3.6 or higher](https://www.python.org/downloads/)
+* [Python 3.7 or higher](https://www.python.org/downloads/)
 
 ## 🛠️ Installation
 Install from PyPI using `pip`, you may need to use `pip3` depending on your installation:
@@ -34,7 +34,7 @@ pip install wipeit
 ```
 
 ## 🚀 Usage
-**wipeit** is a command-line program to purge your Reddit history. It requires a Python interpreter version 3.6+.
+**wipeit** is a command-line program to purge your Reddit history. It requires a Python interpreter version 3.7+.
 
 To authenticate without wiping history you can use the `login` command, a browser window will open prompting you to login to Reddit:
 ```shell

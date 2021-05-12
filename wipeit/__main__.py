@@ -1,7 +1,7 @@
 import click
 
 from wipeit import VERSION
-from wipeit.command import wipe, login, logout
+from wipeit.commands import wipe, login, logout
 
 
 @click.group()

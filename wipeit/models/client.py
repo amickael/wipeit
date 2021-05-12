@@ -8,14 +8,11 @@ from typing import List
 import praw
 from praw.util.token_manager import FileTokenManager, BaseTokenManager
 
-from wipeit import VERSION
-from wipeit.utils import const
-
 
 class AuthorizedClient(praw.Reddit):
-    client_id = const.CLIENT_ID
-    redirect_uri = "http://localhost:8080"
-    user_agent = f"wipeit:{client_id}:{VERSION} (by /u/iPodAddict181)"
+    client_id: str
+    redirect_uri: str
+    user_agent: str
 
     @property
     def refresh_token_filename(self) -> str:

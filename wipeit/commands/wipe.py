@@ -3,13 +3,14 @@ from typing import Type
 
 import click
 
+from wipeit import CONFIG
 from wipeit.models import (
     AuthorizedClient,
     BaseHistory,
     SubmissionHistory,
     CommentHistory,
 )
-from wipeit.utils import const
+from wipeit.app import AppClient
 
 
 class CLIHandler:
@@ -105,7 +106,7 @@ def wipe(
     **kwargs,
 ):
     """Wipe your Reddit history."""
-    client = AuthorizedClient(const.SCOPES)
+    client = AppClient(CONFIG.scopes)
     end_dt = from_date
     start_dt = end_dt - dt.timedelta(days=days)
     handler = CLIHandler(client, start_dt, end_dt, overwrite)

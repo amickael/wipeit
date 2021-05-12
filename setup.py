@@ -28,5 +28,6 @@ setup(
     entry_points={
         "console_scripts": ["wipeit=wipeit.__main__:cli"],
     },
-    python_requires=">=3.6",
+    python_requires=">=3.7",
+    include_package_data=True,
 )

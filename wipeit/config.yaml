@@ -1,0 +1,8 @@
+scopes:
+    - identity
+    - edit
+    - history
+client_id: 9thvo8KiLG6Xlw
+redirect_uri: http://localhost:8080
+author: iPodAddict181
+app_name: wipeit
