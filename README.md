@@ -20,30 +20,83 @@ pip install wipeit
 ## 🚀 Usage
 **wipeit** is a command-line program to purge your Reddit history. It requires a Python interpreter version 3.6+.
 
-The following command will purge the last 30 days of comment and submission history, and will additionally overwrite the content with a random string before deletion:
-```sh
-wipeit -d 30 -sco
+To authenticate without wiping history you can use the `login` command, a browser window will open prompting you to login to Reddit:
+```shell
+wipeit login
 ```
-
+---
+To wipe your Reddit history you can use the `wipe` command. The following command will clear the last 30 days of comment and submission history, and will overwrite them with random text before deletion:
+```shell
+wipeit wipe -d 30 -sco
+```
 > Note: A browser window will open to request access to your account if you have not previously authenticated.
+---
+To remove Reddit credentials from your computer you can use the `logout` command:
+```shell
+wipeit logout
+```
 
 
 ## ⚙️ Options
+### `wipeit`
 ```
---version                 Show the version and exit.
--d, --days INTEGER RANGE  Number of days worth of content to delete.
-                          Defaults to 365.
+Usage: wipeit [OPTIONS] COMMAND [ARGS]...
 
--f, --from TEXT           Date relative to --days, in ISO format (YYYY-MM-
-                          DD). Defaults to today.
+Options:
+  --version  Show the version and exit.
+  --help     Show help message and exit.
 
--c, --comments            Delete comments.
--s, --submissions         Delete submissions.
--o, --overwrite           Overwrite content with random text before
-                          deletion.
+Commands:
+  login   Authorize wipeit with a Reddit account, will open a browser
+          window...
 
---help                    Show help message and exit.
+  logout  Remove Reddit credentials from wipeit, you will be prompted to...
+  wipe    Wipe your Reddit history.
 ```
+
+### `wipeit wipe`
+```
+Usage: wipeit wipe [OPTIONS]
+
+  Wipe your Reddit history.
+
+Options:
+  -d, --days INTEGER RANGE  Number of days worth of content to delete.
+                            Defaults to 365.
+
+  -f, --from-date TEXT      Date relative to --days, in ISO format (YYYY-MM-
+                            DD). Defaults to today.
+
+  -c, --comments            Delete comments.
+  -s, --submissions         Delete submissions.
+  -o, --overwrite           Overwrite content with random text before
+                            deletion.
+
+  --help                    Show help message and exit.
+```
+
+### `wipeit login`
+```
+Usage: wipeit login [OPTIONS]
+
+  Authorize wipeit with a Reddit account, will open a browser window to
+  authenticate.
+
+Options:
+  --help  Show help message and exit.
+```
+
+### `wipeit logout`
+```
+Usage: wipeit logout [OPTIONS]
+
+  Remove Reddit credentials from wipeit, you will be prompted to login the
+  next time the program is run.
+
+Options:
+  --help  Show help message and exit.
+```
+
 
 ## ⚖️ License
 [MIT © 2021 Andrew Mickael](https://github.com/amickael/wipeit/blob/master/LICENSE)

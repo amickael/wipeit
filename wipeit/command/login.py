@@ -6,6 +6,7 @@ from wipeit.utils import const
 
 @click.command()
 def login(*args, **kwargs):
+    """Authorize wipeit with a Reddit account, will open a browser window to authenticate."""
     try:
         client = AuthorizedClient(const.SCOPES)
     except ValueError:

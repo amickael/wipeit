@@ -104,6 +104,7 @@ def wipe(
     *args,
     **kwargs,
 ):
+    """Wipe your Reddit history."""
     client = AuthorizedClient(const.SCOPES)
     end_dt = from_date
     start_dt = end_dt - dt.timedelta(days=days)
