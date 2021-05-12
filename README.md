@@ -97,6 +97,23 @@ Options:
   --help  Show help message and exit.
 ```
 
+## 🪄 Autocompletion
+To enable tab completion you will need to configure your preferred shell to use it. Currently `bash` and `zsh` are supported.
+
+This configuration is totally optional, but may be useful if you use `wipeit` often.
+
+### bash
+Add the following to ` ~/.bashrc`:
+```shell
+eval "$(_WIPEIT_COMPLETE=bash_source wipeit)"
+```
+
+### zsh
+Add the following to `~/.zshrc`:
+```shell
+eval "$(_WIPEIT_COMPLETE=zsh_source wipeit)"
+```
+
 
 ## ⚖️ License
 [MIT © 2021 Andrew Mickael](https://github.com/amickael/wipeit/blob/master/LICENSE)
