@@ -7,6 +7,7 @@ import uuid
 
 from praw.models import Comment, Submission, ListingGenerator
 from praw.models.reddit.mixins import UserContentMixin
+from praw.exceptions import RedditAPIException
 
 if TYPE_CHECKING:
     from .client import AuthorizedClient
@@ -53,7 +54,10 @@ class BaseHistory(ABC, Generic[T]):
         items = self.filter_by_date(start_dt, end_dt)
         for item in items:
             if overwrite:
-                item.edit(uuid.uuid4().hex)
+                try:
+                    item.edit(uuid.uuid4().hex)
+                except RedditAPIException:
+                    pass
             item.delete()
             yield item
 
