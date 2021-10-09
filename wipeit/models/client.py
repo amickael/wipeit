@@ -4,6 +4,7 @@ import socket
 import webbrowser
 from pathlib import Path
 from typing import List
+import datetime as dt
 
 import praw
 from praw.util.token_manager import FileTokenManager, BaseTokenManager
@@ -13,13 +14,19 @@ class AuthorizedClient(praw.Reddit):
     client_id: str
     redirect_uri: str
     user_agent: str
+    base_path = os.path.join(Path.home(), ".wipeit")
 
     @property
     def refresh_token_filename(self) -> str:
-        base_path = os.path.join(Path.home(), ".wipeit")
-        if not os.path.isdir(base_path):
-            os.makedirs(base_path)
-        return os.path.join(base_path, "refresh_token.txt")
+        if not os.path.isdir(self.base_path):
+            os.makedirs(self.base_path)
+        return os.path.join(self.base_path, "refresh_token.txt")
+
+    @property
+    def refresh_token_expires(self) -> str:
+        if not os.path.isdir(self.base_path):
+            os.makedirs(self.base_path)
+        return os.path.join(self.base_path, "expires.txt")
 
     def __init__(
         self, scopes: List[str], duration: str = "permanent", skip_login: bool = False
@@ -42,9 +49,16 @@ class AuthorizedClient(praw.Reddit):
             super().__init__(**init_args)
 
     def __initialize_refresh_token_file(self, refresh_token: str):
+        if os.path.isfile(self.refresh_token_expires):
+            with open(self.refresh_token_expires) as infile:
+                expires = dt.datetime.fromisoformat(infile.read())
+            if dt.datetime.now() > expires:
+                os.remove(self.refresh_token_filename)
         if not os.path.isfile(self.refresh_token_filename):
             with open(self.refresh_token_filename, "w") as outfile:
                 outfile.write(refresh_token)
+            with open(self.refresh_token_expires, "w") as outfile:
+                outfile.write((dt.datetime.now() + dt.timedelta(days=30)).isoformat())
 
     def get_token_manager(self) -> (BaseTokenManager, None):
         if not os.path.isfile(self.refresh_token_filename):
